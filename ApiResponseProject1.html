@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Api Info</title>
+    <style>
+        body{
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            padding-top: 50px;
+        }
+
+        .box{
+            background-color: #212121;
+            padding: 10px;
+            border: solid white;
+            border-radius: 4px;
+            text-align: center;
+            color:#fff;
+            margin: 30px auto;
+            width: 300px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .box:hover{
+            background-color: #333;
+        }
+
+        #avatar-img{
+            border-radius: 50%;
+            border: 2px solid red;
+            display: none;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="followers">Click here to Show Followers Count</div>
+    <div class="box" id="repoCount">Click here to Show Repo Count</div>
+    <div class="box" id="username">Click here to Show UserName</div>
+    <div class="box" id ="avatar">Click to Show Avatar</div>
+    <img id="avatar-img" alt="Avatar Image">
+</body>
+<script>
+    const requestUrl = 'https://api.github.com/users/ShubhamKashyap1001'
+    const xhr = new XMLHttpRequest();
+
+    let userData = null;
+    xhr.open('GET',requestUrl);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4){
+            userData = JSON.parse(this.responseText);
+
+        }
+    }
+    xhr.send();
+
+    document.getElementById('followers').addEventListener('click',function(){
+        if(userData){
+            this.innerHTML = `Followers : ${userData.followers}`
+        }else{
+            alert("Data not loaded yet...")
+        }
+    });
+
+    document.getElementById('repoCount').addEventListener('click',function(){
+        if(userData){
+            this.innerText = `Public Repo : ${userData.public_repos}`
+        }else{
+            alert("Data not loading yet...")
+        }
+    });
+
+    document.getElementById('username').addEventListener('click',function(){
+        if(userData){
+            this.innerHTML = `Username : ${userData.login}`
+        }else{
+            alert("Data not loading yet...")
+        }
+    });
+
+    document.getElementById('avatar').addEventListener('click',function(){
+        if(userData){
+            const avatarImg = document.getElementById('avatar-img');
+            avatarImg.src = userData.avatar_url;
+            avatarImg.style.display = 'block';
+        }else{
+            alert("Data not Loading Yet...")
+        }
+    })
+</script>
+</html>
