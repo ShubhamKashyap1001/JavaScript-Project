@@ -1,0 +1,31 @@
+# fetch():-
+
+>It is priority or micro task queue
+>It execute firstly
+
+respone = fetch('statement'){
+
+}
+
+# Internal implementation  of fetch divided into two parts:-
+1) Data
+2) web Browser/node
+
+Data : ___     <----------------   <-------
+onfulfield[](resolve) _________|          |
+on Rejection[](reject) ___________________| 
+
+web browers/ Node
+        |
+    network request
+            /\
+           /  \
+      Accept  Reject
+        |       |
+      reolve  reject
+
+
+->network request is found the goes to onfulfilled(eg 404 ERROR) otherwise onrejected
+->data firstly occupied data on  global memeory
+->resolve and rejected go to data then data goes to global memory as a response
+->function present in onfulfilled and onrejection responsible for fulfilled the data then responsibility of data to fulfilled the response
