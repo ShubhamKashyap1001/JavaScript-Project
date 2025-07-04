@@ -9,7 +9,7 @@
 // 500	❌ Server error
 
 
-const apiKey = "b6ca4a5b640cb2806a63f9d96371d247";
+const apiKey = process.env.API_KEY;
 
 async function getWeather(){
     const cityInput = document.getElementById('cityInput').value;
